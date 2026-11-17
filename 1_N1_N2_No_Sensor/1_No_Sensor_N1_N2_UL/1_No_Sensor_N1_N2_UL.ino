@@ -28,24 +28,6 @@
 
 #include "Bibliotecas.h"  // Arquivo contendo declaração de bibliotecas e variáveis
 
-/*
-// Máquina de Estado_DL:
-// 10 => Estado Inicial Sem Enlace - Sem Recepção de DL - Sem request UL (standy-by)
-// confirma_novo_radio_base = 10; // AAF 17-09 inicio do Estado_DL == 10
-
-// 1 => Mudança de Rádio request UL
-
-// 2 => Mode LSS only UL
-
-// 3 => Teste de Enlace request UL
-
-// 4 => Mode LSS DL-UL
-
-// 5 => LSS último Pacote request UL
-
-// após send UL, confirma_novo_radio_base = 10;
-
-*/
 
 //=======================================================================
 // 3 - Configuração de Setup de Rádio LoRa
@@ -105,26 +87,6 @@ uint16_t medidasLSS = 0;
 
 int luminosidade; // Variável que vai receber o valor da luminosidade entre 0 e 4095 - ADC 12 bits
 uint8_t feedback_led_amarelo = 0;
-
-// 1. Criamos uma estrutura para expor o ponteiro de função privada em tempo de compilação
-template<typename Tag, typename Tag::type M>
-struct ObtorPrivado {
-  friend typename Tag::type pegar_metodo(Tag) { return M; }
-};
-
-struct LoRaReadRegTag {
-  typedef uint8_t (LoRaClass::*type)(uint8_t);
-  friend type pegar_metodo(LoRaReadRegTag);
-};
-
-// Força a instanciação do ponteiro para a função privada burlando o acesso
-template struct ObtorPrivado<LoRaReadRegTag, &LoRaClass::readRegister>;
-
-// 2. Esta é a função que você chamará no seu código
-uint8_t lerRegistradorLoRa(uint8_t endereco) {
-  auto metodo_privado = pegar_metodo(LoRaReadRegTag());
-  return (LoRa.*metodo_privado)(endereco);
-}
 
 //=======================================================================
 // 4 - Setup de inicialização
@@ -286,50 +248,6 @@ void loop() {
       App_radio_send_UL();
     }
   }
-
-/*
-  // Imprime Radio Config a cada 10 [s]
-  unsigned long tempo_loop_ms = 10000UL;  
-
-  if (millis() - millis_radio_control >= tempo_loop_ms) {        
-
-    // 1. Lê diretamente a memória do chip usando a função bypass
-    uint8_t regModemConfig1 = lerRegistradorLoRa(0x1D); // Controla Bandwidth e Coding Rate
-    uint8_t regModemConfig2 = lerRegistradorLoRa(0x1E); // Controla Spreading Factor
-
-    // 2. Processamento matemático dos bits (Máscaras de bits para o chip SX127x)
-    int sfAtual = regModemConfig2 >> 4; 
-    int crAtual = ((regModemConfig1 & 0x0E) >> 1) + 4; // Extrai o Coding Rate (Retorna 5 para 4/5, 6 para 4/6...)
-
-    // 3. Extração do Bandwidth (Bits 7-4 do reg 0x1D)
-    uint8_t bwCodigo = regModemConfig1 >> 4;
-    float bwRealkHz = 0;
-    switch (bwCodigo) {
-      case 0: bwRealkHz = 7.8;   break;
-      case 1: bwRealkHz = 10.4;  break;
-      case 2: bwRealkHz = 15.6;  break;
-      case 3: bwRealkHz = 20.8;  break;
-      case 4: bwRealkHz = 31.25; break;
-      case 5: bwRealkHz = 41.7;  break;
-      case 6: bwRealkHz = 62.5;  break;
-      case 7: bwRealkHz = 125.0; break;
-      case 8: bwRealkHz = 250.0; break;
-      case 9: bwRealkHz = 500.0; break;
-    }
-
-    // 4. Impressão limpa no Serial Monitor
-    Serial.println(F("\n====== DADOS DO REGISTRADOR EM TEMPO REAL ======"));
-    Serial.print(F("Spreading Factor (SF): ")); Serial.println(sfAtual);
-    Serial.print(F("Bandwidth (BW):        ")); Serial.print(bwRealkHz); Serial.println(F(" kHz"));
-    Serial.print(F("Coding Rate (CR):      4/")); Serial.println(crAtual);
-    Serial.println(F("================================================"));
-
-  // Zera contagem do tempo de controle MQTT para tempo de ESP32 rodando
-  millis_radio_control = millis(); 
-
-  }
-
-*/
 
 
 }
