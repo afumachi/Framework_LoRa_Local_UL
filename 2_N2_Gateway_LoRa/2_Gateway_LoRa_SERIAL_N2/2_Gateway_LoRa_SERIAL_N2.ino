@@ -1,21 +1,6 @@
 /*
 //  MoT LoRa | WissTek IoT
 //
-//  Implementa o Gateway LoRa MQTT
-//
-//  Versão Gateway LoRa MQTT com QoS1: Gateway PKLoRa via broker MQTT ↔ comunicação Borda IoT Python N2_N3
-//  - Mantém toda a camada de rádio LoRa (RFM95) do Framework Basic Local
-//  - Substitui USB/Serial por Wi-Fi + MQTT [PHY]
-//  - Usa a biblioteca MQTT by Joel Gaehwiler Vs. 2.5.3 (MQTT.h) para suportar QoS1 (MQTT com ACK)
-//
-//  Tópicos Publicados no Broker MQTT
-//
-//  - DL: assina "mot_lora_SEU_RA/gateway/downlink"  
-//    Gateway LoRa ← realiza leitura via Broker MQTT da publicação do Tópico de Downlink do Python
-//
-//  - UL: publica em "mot_lora_SEU_RA/gateway/uplink"
-//    Gateway → publica Tópico de Uplink ao Broker MQTT - Python N2_N3 realiza a leitura
-//
 //  Última Modificação: Branquinho / Guilherme / Luís Felipe / Anderson - 17/10/2026
 //
 */
