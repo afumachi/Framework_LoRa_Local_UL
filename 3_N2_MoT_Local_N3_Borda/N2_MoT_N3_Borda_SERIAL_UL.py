@@ -1,6 +1,6 @@
 # MoT LoRa + Borda | N2 e N3 | WissTek-IoT | Framework LoRa Local
 # 15/10/2026 - Branquinho - Guilherme - Anderson
-
+#
 # ========================== 1 - Bibliotecas
 import serial
 import math
@@ -75,8 +75,6 @@ def ler_parametros_arquivo():
    except Exception:
       pass
    return None
-
-
 
 def ler_cmd_led_amarelo():
     caminho_led = os.path.join(caminho_parametros, "cmd_led_amarelo.txt")

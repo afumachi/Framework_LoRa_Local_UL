@@ -1,4 +1,5 @@
 # Controle de Parâmetros e Execução | N6 | WissTek-IoT | Framework LoRa
+# Rodar 1o
 import tkinter as tk
 from tkinter import messagebox
 import serial.tools.list_ports

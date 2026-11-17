@@ -4,13 +4,13 @@ import time
 import os
 import math
 from datetime import datetime
-
+#
 # Pasta do Nível 4 (4_N4_Armazenamento)
 PASTA_N4 = "../4_N4_Armazenamento"
 PASTA_PARAMETROS = f"{PASTA_N4}/Parametros"
 PASTA_PROCESSADOS = f"{PASTA_N4}/Dados_Processados"
 ARQUIVO_PARAMETROS = f"{PASTA_PARAMETROS}/dados_processamento.txt"
-
+#
 # Garante que as pastas existem
 if not os.path.exists(PASTA_PROCESSADOS):
     os.makedirs(PASTA_PROCESSADOS)

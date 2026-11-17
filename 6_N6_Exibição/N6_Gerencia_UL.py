@@ -1,5 +1,6 @@
-# Exibição | Gerência [RSSI, SNR e PSR] | N6 | WissTek-IoT | Framework LoRa
+# Exibição | Gerência [RSSI, SNR e PSR UL] | N6 | WissTek-IoT | Framework LoRa
 # ====== Nível 6 - Gerência ======
+#
 import tkinter as tk
 from tkinter import messagebox, filedialog
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
